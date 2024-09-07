@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServices {
@@ -23,7 +24,11 @@ public class PersonServices {
         Person newPerson = new Person(data);
         return repository.save(newPerson);
     }
-    // Ler as informações de uma pessoa
+
+    // Ler as informações de uma pessoa (getById)
+    public Optional<Person> getPerson(String personId) {
+        return repository.findById(personId);
+    }
 
     // Atualizar as informações de uma pessoa
 

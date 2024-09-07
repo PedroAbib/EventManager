@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/person")
@@ -20,6 +21,12 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAllPerson() {
         List<Person> allPerson = personServices.getAllPerson();
         return ResponseEntity.ok(allPerson);
+    }
+
+    @GetMapping("/{personId}")
+    public ResponseEntity<Optional<Person>> getPerson(@PathVariable String personId) {
+        Optional<Person> person = personServices.getPerson(personId);
+        return ResponseEntity.ok(person);
     }
 
     @PostMapping
