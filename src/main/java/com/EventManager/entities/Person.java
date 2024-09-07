@@ -44,4 +44,11 @@ public class Person {
     @Column(name = "postal_code")
     @Size(min = 8, message = "Postal code must be at least 8 characters long")
     private String postalCode;
+
+    public Person(PersonRecord personDTO) {
+        this.fullName = personDTO.fullName();
+        this.cpf = personDTO.cpf();
+        this.phoneNumber = personDTO.phoneNumber();
+        this.postalCode = personDTO.postalCode();
+    }
 }
