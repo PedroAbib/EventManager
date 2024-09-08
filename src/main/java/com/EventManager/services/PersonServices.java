@@ -14,23 +14,37 @@ public class PersonServices {
     @Autowired
     private PersonRepository repository;
 
-    // Ler todas as pessoas cadastradas
     public List<Person> getAllPerson() {
         return repository.findAll();
     }
 
-    // Adicionar uma pessoa
+    public Optional<Person> getPerson(String personId) {
+        return repository.findById(personId);
+    }
+
     public Person addPerson(PersonRecord data) {
         Person newPerson = new Person(data);
         return repository.save(newPerson);
     }
 
-    // Ler as informações de uma pessoa (getById)
-    public Optional<Person> getPerson(String personId) {
-        return repository.findById(personId);
-    }
-
     // Atualizar as informações de uma pessoa
+    public Person updatePerson(String personId, PersonRecord data) {
+        Optional<Person> person = repository.findById(personId);
+
+        if (person.isPresent()) {
+            Person updatedPerson = person.get();
+
+            if (data != null) {
+                updatedPerson.setFullName(data.fullName());
+                updatedPerson.setCpf(data.cpf());
+                updatedPerson.setPhoneNumber(data.phoneNumber());
+                updatedPerson.setPostalCode(data.postalCode());
+            }
+            repository.save(updatedPerson);
+        }
+
+        return null;
+    }
 
     // Deletar uma pessoa
 }

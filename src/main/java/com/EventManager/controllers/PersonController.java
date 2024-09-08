@@ -34,4 +34,12 @@ public class PersonController {
         Person newPerson = personServices.addPerson(data);
         return ResponseEntity.ok(newPerson);
     }
+
+    @PutMapping("/{personId}")
+    public ResponseEntity<Person> updatePerson(@PathVariable String personId, @RequestBody PersonRecord data) {
+        Person updatedPerson = personServices.updatePerson(personId, data);
+        return ResponseEntity.ok(updatedPerson);
+    }
+
+
 }
