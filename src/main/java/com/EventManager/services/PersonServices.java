@@ -3,6 +3,7 @@ package com.EventManager.services;
 import com.EventManager.entities.Person;
 import com.EventManager.entities.PersonRecord;
 import com.EventManager.repositories.PersonRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,6 @@ public class PersonServices {
         return repository.save(newPerson);
     }
 
-    // Atualizar as informações de uma pessoa
     public Person updatePerson(String personId, PersonRecord data) {
         Optional<Person> person = repository.findById(personId);
 
@@ -40,11 +40,20 @@ public class PersonServices {
                 updatedPerson.setPhoneNumber(data.phoneNumber());
                 updatedPerson.setPostalCode(data.postalCode());
             }
-            repository.save(updatedPerson);
+            return repository.save(updatedPerson);
         }
 
         return null;
     }
 
-    // Deletar uma pessoa
+    public void deletePerson(String personId) {
+        Optional<Person> person = repository.findById(personId);
+
+        if (person.isPresent()) {
+            repository.deleteById(personId);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
+
 }
