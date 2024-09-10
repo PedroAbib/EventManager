@@ -28,7 +28,12 @@ public class Event {
     @ManyToMany
     private List<Person> participants;
 
-    private Boolean isCompleted;
+    private Boolean isCompleted = false;
 
-    // Construtor a partir de DTO
+    public Event(EventRecord data) {
+        this.name = data.name();
+        this.date = data.date();
+        this.address = data.address();
+        this.description = data.description();
+    }
 }
