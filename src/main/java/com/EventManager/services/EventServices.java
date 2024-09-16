@@ -3,9 +3,11 @@ package com.EventManager.services;
 import com.EventManager.entities.Event;
 import com.EventManager.entities.EventRecord;
 import com.EventManager.repositories.EventRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +29,31 @@ public class EventServices {
         return repository.save(newEvent);
     }
 
-    // updateEvent
+    public Event updateEvent(String eventId, EventRecord data) {
+        Optional<Event> event = repository.findById(eventId);
 
-    // deleteEvent
+        if (event.isPresent()) {
+            Event updatedEvent = event.get();
+
+            if (data != null) {
+                updatedEvent.setName(data.name());
+                updatedEvent.setDate(data.date());
+                updatedEvent.setAddress(data.address());
+                updatedEvent.setDescription(data.description());
+            }
+            return repository.save(updatedEvent);
+        }
+
+        return null;
+    }
+
+    public void deleteEvent(String eventId) {
+        Optional<Event> event = repository.findById(eventId);
+
+        if (event.isPresent()) {
+            repository.deleteById(eventId);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
 }

@@ -4,6 +4,7 @@ import com.EventManager.entities.Event;
 import com.EventManager.entities.EventRecord;
 import com.EventManager.services.EventServices;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,17 @@ public class EventController {
     public ResponseEntity<Event> addEvent(@RequestBody @Valid EventRecord data) {
         Event newEvent = eventServices.addEvent(data);
         return ResponseEntity.ok(newEvent);
+    }
+
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Event> updateEvent(@PathVariable String eventId, @RequestBody EventRecord data) {
+        Event updatedEvent = eventServices.updateEvent(eventId, data);
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    @DeleteMapping("/{eventId}")
+    public ResponseEntity<Event> deleteEvent(@PathVariable String eventId) {
+        eventServices.deleteEvent(eventId);
+        return ResponseEntity.ok().build();
     }
 }
