@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/event")
@@ -20,6 +21,12 @@ public class EventController {
     public ResponseEntity<List<Event>> getAllEvents() {
         List<Event> allEvents = eventServices.getAllEvents();
         return ResponseEntity.ok(allEvents);
+    }
+
+    @GetMapping("/{eventId}")
+    public ResponseEntity<Optional<Event>> getEvent(@PathVariable String eventId) {
+        Optional<Event> event = eventServices.getEvent(eventId);
+        return ResponseEntity.ok(event);
     }
 
     @PostMapping
