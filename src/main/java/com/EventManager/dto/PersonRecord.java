@@ -1,4 +1,4 @@
-package com.EventManager.entities;
+package com.EventManager.dto;
 
 public record PersonRecord(
         String fullName,

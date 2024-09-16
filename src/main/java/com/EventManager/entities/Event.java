@@ -1,5 +1,6 @@
 package com.EventManager.entities;
 
+import com.EventManager.dto.EventRecord;
 import jakarta.persistence.*;
 import lombok.*;
 

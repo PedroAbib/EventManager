@@ -1,7 +1,7 @@
 package com.EventManager.services;
 
 import com.EventManager.entities.Person;
-import com.EventManager.entities.PersonRecord;
+import com.EventManager.dto.PersonRecord;
 import com.EventManager.repositories.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

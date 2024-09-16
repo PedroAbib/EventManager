@@ -1,7 +1,7 @@
 package com.EventManager.controllers;
 
 import com.EventManager.entities.Person;
-import com.EventManager.entities.PersonRecord;
+import com.EventManager.dto.PersonRecord;
 import com.EventManager.services.PersonServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

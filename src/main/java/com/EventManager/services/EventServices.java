@@ -1,13 +1,12 @@
 package com.EventManager.services;
 
 import com.EventManager.entities.Event;
-import com.EventManager.entities.EventRecord;
+import com.EventManager.dto.EventRecord;
 import com.EventManager.repositories.EventRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

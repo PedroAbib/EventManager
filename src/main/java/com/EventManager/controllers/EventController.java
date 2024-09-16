@@ -1,10 +1,9 @@
 package com.EventManager.controllers;
 
 import com.EventManager.entities.Event;
-import com.EventManager.entities.EventRecord;
+import com.EventManager.dto.EventRecord;
 import com.EventManager.services.EventServices;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

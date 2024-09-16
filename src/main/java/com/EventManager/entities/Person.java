@@ -1,5 +1,6 @@
 package com.EventManager.entities;
 
+import com.EventManager.dto.PersonRecord;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
