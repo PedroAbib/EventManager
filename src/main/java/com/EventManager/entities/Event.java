@@ -20,6 +20,8 @@ public class Event {
 
     private String name;
 
+    private String imageURL;
+
     private String date; // talvez utilizar LocalDate??
 
     private String address;
