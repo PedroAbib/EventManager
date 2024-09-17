@@ -24,7 +24,7 @@ public class RegistrationService {
     @Autowired
     private PersonRepository personRepository;
 
-    public Registration registerPersonToEvent(String eventId, String personId) {
+    public void registerPersonToEvent(String eventId, String personId) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(); // Handle these Exceptions later
         Person person = personRepository.findById(personId)
@@ -34,7 +34,7 @@ public class RegistrationService {
         registration.setEvent(event);
         registration.setPerson(person);
 
-        return registrationRepository.save(registration);
+        registrationRepository.save(registration);
     }
 
     public List<Person> getRegisteredPeople(String eventId) {
