@@ -1,7 +1,6 @@
 package com.EventManager.controllers;
 
 import com.EventManager.entities.Person;
-import com.EventManager.entities.Registration;
 import com.EventManager.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

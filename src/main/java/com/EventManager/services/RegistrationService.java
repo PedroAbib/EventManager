@@ -7,7 +7,6 @@ import com.EventManager.repositories.EventRepository;
 import com.EventManager.repositories.PersonRepository;
 import com.EventManager.repositories.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -4,8 +4,6 @@ import com.EventManager.dto.EventRecord;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
