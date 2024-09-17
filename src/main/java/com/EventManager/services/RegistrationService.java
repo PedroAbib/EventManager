@@ -26,7 +26,7 @@ public class RegistrationService {
 
     public Registration registerPersonToEvent(String eventId, String personId) {
         Event event = eventRepository.findById(eventId)
-                .orElseThrow(); // Handle this Exceptions later
+                .orElseThrow(); // Handle these Exceptions later
         Person person = personRepository.findById(personId)
                 .orElseThrow();
 
