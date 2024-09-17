@@ -28,9 +28,6 @@ public class Event {
 
     private String description;
 
-    @ManyToMany
-    private List<Person> participants;
-
     private Boolean isCompleted = false;
 
     public Event(EventRecord data) {
