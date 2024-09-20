@@ -28,4 +28,9 @@ public class Registration {
     private LocalDate registrationDate;
 
     private Boolean isPaid = false;
+
+    @PrePersist
+    protected void onCreate() {
+        this.registrationDate = LocalDate.now();
+    }
 }
