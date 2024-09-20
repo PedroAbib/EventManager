@@ -3,6 +3,8 @@ package com.EventManager.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -22,4 +24,8 @@ public class Registration {
     @ManyToOne
     @JoinColumn
     private Person person;
+
+    private LocalDate registrationDate;
+
+    private Boolean isPaid = false;
 }
