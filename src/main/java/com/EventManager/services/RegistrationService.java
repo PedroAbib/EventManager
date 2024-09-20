@@ -1,15 +1,19 @@
 package com.EventManager.services;
 
+import com.EventManager.dto.RegistrationResponseDTO;
 import com.EventManager.entities.Event;
 import com.EventManager.entities.Person;
 import com.EventManager.entities.Registration;
+import com.EventManager.mappers.RegistrationMapper;
 import com.EventManager.repositories.EventRepository;
 import com.EventManager.repositories.PersonRepository;
 import com.EventManager.repositories.RegistrationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +28,9 @@ public class RegistrationService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private RegistrationMapper registrationMapper;
+
     public void registerPersonToEvent(String eventId, String personId) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(); // Handle these Exceptions later
@@ -37,11 +44,21 @@ public class RegistrationService {
         registrationRepository.save(registration);
     }
 
-    public List<Person> getRegisteredPeople(String eventId) {
+    public List<RegistrationResponseDTO> getRegisteredPeople(String eventId) {
         List<Registration> registrations = registrationRepository.findByEventId(eventId);
 
         return registrations.stream()
-                .map(Registration::getPerson)
+                .map(registrationMapper::toResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    public void unregisterPersonFromEvent(String registrationId) {
+        Optional<Registration> registration = registrationRepository.findById(registrationId);
+
+        if (registration.isPresent()) {
+            registrationRepository.deleteById(registrationId);
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.EventManager.controllers;
 
-import com.EventManager.entities.Person;
+import com.EventManager.dto.RegistrationResponseDTO;
 import com.EventManager.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +21,14 @@ public class RegistrationController {
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<List<Person>> getRegisteredPeople(@PathVariable String eventId) {
-        List<Person> registeredPeople = registrationService.getRegisteredPeople(eventId);
+    public ResponseEntity<List<RegistrationResponseDTO>> getRegisteredPeople(@PathVariable String eventId) {
+        List<RegistrationResponseDTO> registeredPeople = registrationService.getRegisteredPeople(eventId);
         return ResponseEntity.ok(registeredPeople);
     }
 
+    @DeleteMapping("/{registrationId}")
+    public ResponseEntity<String> deleteRegistration(@PathVariable String registrationId) {
+        registrationService.unregisterPersonFromEvent(registrationId);
+        return ResponseEntity.ok("Person unregistered successfully!");
+    }
 }
