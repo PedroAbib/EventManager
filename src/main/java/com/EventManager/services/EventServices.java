@@ -1,7 +1,7 @@
 package com.EventManager.services;
 
 import com.EventManager.entities.Event;
-import com.EventManager.dto.EventRecord;
+import com.EventManager.dto.EventDTO;
 import com.EventManager.repositories.EventRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ public class EventServices {
         return repository.findById(eventId);
     }
 
-    public Event addEvent(EventRecord data) {
+    public Event addEvent(EventDTO data) {
         Event newEvent = new Event(data);
         return repository.save(newEvent);
     }
 
-    public Event updateEvent(String eventId, EventRecord data) {
+    public Event updateEvent(String eventId, EventDTO data) {
         Optional<Event> event = repository.findById(eventId);
 
         if (event.isPresent()) {

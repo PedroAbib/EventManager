@@ -1,7 +1,7 @@
 package com.EventManager.controllers;
 
 import com.EventManager.entities.Event;
-import com.EventManager.dto.EventRecord;
+import com.EventManager.dto.EventDTO;
 import com.EventManager.services.EventServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> addEvent(@RequestBody @Valid EventRecord data) {
+    public ResponseEntity<Event> addEvent(@RequestBody @Valid EventDTO data) {
         Event newEvent = eventServices.addEvent(data);
         return ResponseEntity.ok(newEvent);
     }
 
     @PutMapping("/{eventId}")
-    public ResponseEntity<Event> updateEvent(@PathVariable String eventId, @RequestBody EventRecord data) {
+    public ResponseEntity<Event> updateEvent(@PathVariable String eventId, @RequestBody EventDTO data) {
         Event updatedEvent = eventServices.updateEvent(eventId, data);
         return ResponseEntity.ok(updatedEvent);
     }

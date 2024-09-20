@@ -1,6 +1,6 @@
 package com.EventManager.entities;
 
-import com.EventManager.dto.PersonRecord;
+import com.EventManager.dto.PersonDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -46,7 +46,7 @@ public class Person {
     @Size(min = 8, message = "Postal code must be at least 8 characters long")
     private String postalCode;
 
-    public Person(PersonRecord personDTO) {
+    public Person(PersonDTO personDTO) {
         this.fullName = personDTO.fullName();
         this.cpf = personDTO.cpf();
         this.phoneNumber = personDTO.phoneNumber();

@@ -1,7 +1,7 @@
 package com.EventManager.controllers;
 
 import com.EventManager.entities.Person;
-import com.EventManager.dto.PersonRecord;
+import com.EventManager.dto.PersonDTO;
 import com.EventManager.services.PersonServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> addPerson(@RequestBody @Valid PersonRecord data) {
+    public ResponseEntity<Person> addPerson(@RequestBody @Valid PersonDTO data) {
         Person newPerson = personServices.addPerson(data);
         return ResponseEntity.ok(newPerson);
     }
 
     @PutMapping("/{personId}")
-    public ResponseEntity<Person> updatePerson(@PathVariable String personId, @RequestBody PersonRecord data) {
+    public ResponseEntity<Person> updatePerson(@PathVariable String personId, @RequestBody PersonDTO data) {
         Person updatedPerson = personServices.updatePerson(personId, data);
         return ResponseEntity.ok(updatedPerson);
     }

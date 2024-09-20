@@ -1,6 +1,6 @@
 package com.EventManager.entities;
 
-import com.EventManager.dto.EventRecord;
+import com.EventManager.dto.EventDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,7 +28,7 @@ public class Event {
 
     private Boolean isCompleted = false;
 
-    public Event(EventRecord data) {
+    public Event(EventDTO data) {
         this.name = data.name();
         this.date = data.date();
         this.address = data.address();

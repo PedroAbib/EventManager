@@ -1,7 +1,7 @@
 package com.EventManager.services;
 
 import com.EventManager.entities.Person;
-import com.EventManager.dto.PersonRecord;
+import com.EventManager.dto.PersonDTO;
 import com.EventManager.repositories.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ public class PersonServices {
         return repository.findById(personId);
     }
 
-    public Person addPerson(PersonRecord data) {
+    public Person addPerson(PersonDTO data) {
         Person newPerson = new Person(data);
         return repository.save(newPerson);
     }
 
-    public Person updatePerson(String personId, PersonRecord data) {
+    public Person updatePerson(String personId, PersonDTO data) {
         Optional<Person> person = repository.findById(personId);
 
         if (person.isPresent()) {

@@ -1,6 +1,6 @@
 package com.EventManager.dto;
 
-public record PersonRecord(
+public record PersonDTO(
         String fullName,
         String cpf,
         String phoneNumber,

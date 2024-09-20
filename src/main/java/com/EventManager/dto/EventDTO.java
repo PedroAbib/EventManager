@@ -1,6 +1,6 @@
 package com.EventManager.dto;
 
-public record EventRecord(
+public record EventDTO(
         String name,
         String date,
         String address,
