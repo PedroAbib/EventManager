@@ -1,5 +1,6 @@
 package com.EventManager.services;
 
+import com.EventManager.dto.RegistrationDTO;
 import com.EventManager.dto.RegistrationResponseDTO;
 import com.EventManager.entities.Event;
 import com.EventManager.entities.Person;
@@ -50,6 +51,21 @@ public class RegistrationService {
         return registrations.stream()
                 .map(registrationMapper::toResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    public void toggleIsPaid(String registrationId, RegistrationDTO newData) {
+        Optional<Registration> existingRegistration = registrationRepository.findById(registrationId);
+
+        if (existingRegistration.isPresent()) {
+            Registration registration = existingRegistration.get();
+
+            if (newData.isPaid() != null) {
+                registration.setIsPaid(newData.isPaid());
+            }
+            registrationRepository.save(registration);
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 
     public void unregisterPersonFromEvent(String registrationId) {

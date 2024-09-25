@@ -1,6 +1,8 @@
 package com.EventManager.controllers;
 
+import com.EventManager.dto.RegistrationDTO;
 import com.EventManager.dto.RegistrationResponseDTO;
+import com.EventManager.entities.Registration;
 import com.EventManager.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,12 @@ public class RegistrationController {
     public ResponseEntity<List<RegistrationResponseDTO>> getRegisteredPeople(@PathVariable String eventId) {
         List<RegistrationResponseDTO> registeredPeople = registrationService.getRegisteredPeople(eventId);
         return ResponseEntity.ok(registeredPeople);
+    }
+
+    @PutMapping("/{registrationId}")
+    public ResponseEntity<String> toggleRegistrationPayment(@PathVariable String registrationId, @RequestBody RegistrationDTO data) {
+        registrationService.toggleIsPaid(registrationId, data);
+        return ResponseEntity.ok("Payment toggled");
     }
 
     @DeleteMapping("/{registrationId}")
