@@ -61,9 +61,9 @@ public class PersonServices {
                 }
             }
             return repository.save(updatedPerson);
+        } else {
+            throw new EntityNotFoundException();
         }
-
-        return null; // Maybe I should return an Exception here
     }
 
     public void deletePerson(String personId) {
