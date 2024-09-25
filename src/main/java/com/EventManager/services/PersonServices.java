@@ -35,15 +35,35 @@ public class PersonServices {
             Person updatedPerson = person.get();
 
             if (data != null) {
-                updatedPerson.setFullName(data.fullName());
-                updatedPerson.setCpf(data.cpf());
-                updatedPerson.setPhoneNumber(data.phoneNumber());
-                updatedPerson.setPostalCode(data.postalCode());
+                if (data.fullName() != null && !data.fullName().isEmpty()) {
+                    updatedPerson.setFullName(data.fullName());
+                }
+                if (data.tagName() != null && !data.tagName().isEmpty()) {
+                    updatedPerson.setTagName(data.tagName());
+                }
+                if (data.workField() != null && !data.workField().isEmpty()) {
+                    updatedPerson.setWorkField(data.workField());
+                }
+                if (data.cpf() != null && !data.cpf().isEmpty()) {
+                    updatedPerson.setCpf(data.cpf());
+                }
+                if (data.email() != null && !data.email().isEmpty()) {
+                    updatedPerson.setEmail(data.email());
+                }
+                if (data.phoneNumber() != null && !data.phoneNumber().isEmpty()) {
+                    updatedPerson.setPhoneNumber(data.phoneNumber());
+                }
+                if (data.address() != null && !data.address().isEmpty()) {
+                    updatedPerson.setAddress(data.address());
+                }
+                if (data.postalCode() != null && !data.postalCode().isEmpty()) {
+                    updatedPerson.setPostalCode(data.postalCode());
+                }
             }
             return repository.save(updatedPerson);
         }
 
-        return null;
+        return null; // Maybe I should return an Exception here
     }
 
     public void deletePerson(String personId) {
