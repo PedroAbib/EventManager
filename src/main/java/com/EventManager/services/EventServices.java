@@ -35,15 +35,29 @@ public class EventServices {
             Event updatedEvent = event.get();
 
             if (data != null) {
-                updatedEvent.setName(data.name());
-                updatedEvent.setDate(data.date());
-                updatedEvent.setAddress(data.address());
-                updatedEvent.setDescription(data.description());
+                if (data.name() != null && !data.name().isEmpty()) {
+                    updatedEvent.setName(data.name());
+                }
+                if (data.imageURL() != null && !data.imageURL().isEmpty()) {
+                    updatedEvent.setImageURL(data.imageURL());
+                }
+                if (data.date() != null) {
+                    updatedEvent.setDate(data.date());
+                }
+                if (data.address() != null && !data.address().isEmpty()) {
+                    updatedEvent.setAddress(data.address());
+                }
+                if (data.description() != null && !data.description().isEmpty()) {
+                    updatedEvent.setDescription(data.description());
+                }
+                if (data.isCompleted() != null) {
+                    updatedEvent.setIsCompleted(data.isCompleted());
+                }
             }
             return repository.save(updatedEvent);
+        } else {
+            throw new EntityNotFoundException();
         }
-
-        return null;
     }
 
     public void deleteEvent(String eventId) {
