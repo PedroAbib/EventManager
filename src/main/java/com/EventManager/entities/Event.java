@@ -4,6 +4,8 @@ import com.EventManager.dto.EventDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -20,7 +22,7 @@ public class Event {
 
     private String imageURL;
 
-    private String date; // talvez utilizar LocalDate??
+    private LocalDate date;
 
     private String address;
 
