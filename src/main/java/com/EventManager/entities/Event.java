@@ -1,6 +1,7 @@
 package com.EventManager.entities;
 
 import com.EventManager.dto.EventDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Event {
 
     private String imageURL;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
 
     private String address;
