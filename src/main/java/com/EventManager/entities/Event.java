@@ -36,6 +36,7 @@ public class Event {
 
     public Event(EventDTO data) {
         this.name = data.name();
+        this.imageURL = data.imageURL();
         this.date = data.date();
         this.address = data.address();
         this.description = data.description();
