@@ -2,6 +2,7 @@ package com.EventManager.services;
 
 import com.EventManager.entities.Person;
 import com.EventManager.dto.PersonDTO;
+import com.EventManager.exceptions.ResourceNotFoundException;
 import com.EventManager.repositories.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,13 @@ public class PersonServices {
     }
 
     public Optional<Person> getPerson(String personId) {
-        return repository.findById(personId);
+        Optional<Person> person = repository.findById(personId);
+
+        if(person.isPresent()) {
+            return person;
+        } else {
+            throw new ResourceNotFoundException("Person ID not found.");
+        }
     }
 
     public Person addPerson(PersonDTO data) {
@@ -61,9 +68,9 @@ public class PersonServices {
                 }
             }
             return repository.save(updatedPerson);
+        } else {
+            throw new ResourceNotFoundException("Person ID not found.");
         }
-
-        return null; // Maybe I should return an Exception here
     }
 
     public void deletePerson(String personId) {
@@ -72,7 +79,7 @@ public class PersonServices {
         if (person.isPresent()) {
             repository.deleteById(personId);
         } else {
-            throw new EntityNotFoundException();
+            throw new ResourceNotFoundException("Person ID not found.");
         }
     }
 
