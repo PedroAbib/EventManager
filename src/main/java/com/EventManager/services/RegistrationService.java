@@ -5,11 +5,11 @@ import com.EventManager.dto.RegistrationResponseDTO;
 import com.EventManager.entities.Event;
 import com.EventManager.entities.Person;
 import com.EventManager.entities.Registration;
+import com.EventManager.exceptions.ResourceNotFoundException;
 import com.EventManager.mappers.RegistrationMapper;
 import com.EventManager.repositories.EventRepository;
 import com.EventManager.repositories.PersonRepository;
 import com.EventManager.repositories.RegistrationRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +34,9 @@ public class RegistrationService {
 
     public void registerPersonToEvent(String eventId, String personId) {
         Event event = eventRepository.findById(eventId)
-                .orElseThrow(); // Handle these Exceptions later
+                .orElseThrow(() -> new ResourceNotFoundException("Event ID not found.")); // Handle these Exceptions later
         Person person = personRepository.findById(personId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Person ID not found."));
 
         Registration registration = new Registration();
         registration.setEvent(event);
@@ -47,6 +47,7 @@ public class RegistrationService {
 
     public List<RegistrationResponseDTO> getRegisteredPeople(String eventId) {
         List<Registration> registrations = registrationRepository.findByEventId(eventId);
+        // Review this implementation on line 50
 
         return registrations.stream()
                 .map(registrationMapper::toResponseDTO)
@@ -64,7 +65,7 @@ public class RegistrationService {
             }
             registrationRepository.save(registration);
         } else {
-            throw new EntityNotFoundException();
+            throw new ResourceNotFoundException("Registration ID not found.");
         }
     }
 
@@ -74,7 +75,7 @@ public class RegistrationService {
         if (registration.isPresent()) {
             registrationRepository.deleteById(registrationId);
         } else {
-            throw new EntityNotFoundException();
+            throw new ResourceNotFoundException("Registration ID not found.");
         }
     }
 }

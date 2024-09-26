@@ -2,8 +2,8 @@ package com.EventManager.services;
 
 import com.EventManager.entities.Event;
 import com.EventManager.dto.EventDTO;
+import com.EventManager.exceptions.ResourceNotFoundException;
 import com.EventManager.repositories.EventRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,12 @@ public class EventServices {
     }
 
     public Optional<Event> getEvent(String eventId) {
-        return repository.findById(eventId);
+        Optional<Event> event = repository.findById(eventId);
+        if (event.isPresent()) {
+            return event;
+        } else {
+            throw new ResourceNotFoundException("Event ID not found.");
+        }
     }
 
     public Event addEvent(EventDTO data) {
@@ -56,7 +61,7 @@ public class EventServices {
             }
             return repository.save(updatedEvent);
         } else {
-            throw new EntityNotFoundException();
+            throw new ResourceNotFoundException("Event ID not found.");
         }
     }
 
@@ -66,7 +71,7 @@ public class EventServices {
         if (event.isPresent()) {
             repository.deleteById(eventId);
         } else {
-            throw new EntityNotFoundException();
+            throw new ResourceNotFoundException("Event ID not found.");
         }
     }
 }

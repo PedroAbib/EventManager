@@ -3,6 +3,7 @@ package com.EventManager.entities;
 import com.EventManager.dto.EventDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Size(min = 3, message = "Event name must be at least 3 characters long")
     private String name;
 
     private String imageURL;
