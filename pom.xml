@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>EventManager</artifactId>
+	<artifactId>EventManagerBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EventManager</name>
 	<description>Project to manage events and people registry.</description>
